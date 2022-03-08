@@ -1,12 +1,12 @@
 {
   "expo": {
-    "name": "Recepies-App",
-    "slug": "Recepies-App",
+    "name": "Workshop-recipes-app-rn",
+    "slug": "Workshop-recipes-app-rn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
-      "image": "./assets/favicon.png",
+      "image": "./assets/splash.png",
       "resizeMode": "contain",
       "backgroundColor": "#ffffff"
     },

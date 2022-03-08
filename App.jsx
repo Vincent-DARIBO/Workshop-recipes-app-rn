@@ -1,12 +1,17 @@
-import React from "react";
+import "react-native-gesture-handler";
+import * as React from "react";
+import { StyleSheet, Text, View } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
-import Blank from "./navigation/Blank";
-import { DrawerNavigator } from "./navigation/Drawer";
+
+import { createDrawerNavigator } from "@react-navigation/drawer";
+import DrawerNavigator from "./navigation/Drawer"
+
+const Drawer = createDrawerNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <DrawerNavigator />
+      <DrawerNavigator/>
     </NavigationContainer>
   );
 }
