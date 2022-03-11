@@ -2,7 +2,8 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerContent } from "./DrawerContent";
 
-import Blank from "./Blank";
+import Blank from "../Blank";
+import BottomTabsNavigator from "../BottomTabs/BottomTabs";
 
 const Drawer = createDrawerNavigator();
 //TODO: voir avec kery pour le details screen
@@ -14,7 +15,7 @@ export default function DrawerNavigator() {
     >
       <Drawer.Screen
         name="Blank"
-        component={Blank}
+        component={BottomTabsNavigator}
         // options={{ headerShown: false }}
       />
     </Drawer.Navigator>
