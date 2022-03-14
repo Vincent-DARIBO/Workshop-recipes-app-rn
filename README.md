@@ -1,4 +1,4 @@
-#Workshop-recipes-app-rn
+# Workshop-recipes-app-rn
 A simple app to master the basics of React Native (state management, internationalization, theming...)
 Created by [@Vincent-DARIBO](https://github.com/Vincent-DARIBO) and [@taniabezancon](https://github.com/taniabezancon).
 
