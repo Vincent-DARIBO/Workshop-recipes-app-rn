@@ -3,6 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "react-native";
+import Home from "../../screens/Home";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -15,19 +16,13 @@ function Cmp({ title }) {
 }
 
 export default function BottomTabsNavigator() {
-  const [setSelected, selcted] = React.useState("home");
   return (
     <BottomTabNavigator.Navigator
       screenOptions={{ tabBarActiveTintColor: "green", headerShown: false }}
     >
       <BottomTabNavigator.Screen
         name="home"
-        component={React.useCallback(
-          () => (
-            <Cmp title="Home" />
-          ),
-          []
-        )}
+        component={Home}
         options={{
           tabBarIcon: () => <Entypo name="home" size={30} color={"green"} />,
         }}
