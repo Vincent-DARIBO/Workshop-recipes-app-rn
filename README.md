@@ -1,5 +1,5 @@
 # Workshop-recipes-app-rn
-A simple app to master the basics of React Native (state management, internationalization, theming...)
+A simple app to master the basics of React Native (Navigation and basic components)
 Created by [@Vincent-DARIBO](https://github.com/Vincent-DARIBO) and [@taniabezancon](https://github.com/taniabezancon).
 
 [![forthebadge](https://forthebadge.com/images/badges/built-with-love.svg)](https://forthebadge.com)
@@ -13,27 +13,14 @@ Created by [@Vincent-DARIBO](https://github.com/Vincent-DARIBO) and [@taniabezan
 
 This app brings together all the basic principles of creating an application. We created this application to apply our knowledge of React Native.
 You can find the concepts of:
-
-- Internationalization (Manage the language used according to that of the device)
-- Theming
 - Navigation
 - UI/UX
-- Testing with jest
-- Date management and formatting
-- Mode online/offline
-- State management
-- The backend with the API to communicate with the front-end
-- Application strategy and testing
-	
+
 ## Technologies
 Project is created with:
 * React Native/Expo
 * React Navigation -> Navigation
 * React Native Paper -> Components and Theming
-* React i18 next -> Internationalization
-* DayJS -> Date management and formatting
-* Jest -> testing
-* Mockaroo -> data for the tests
 	
 ## Setup
 
@@ -51,3 +38,25 @@ $ cd ../React-Native-training-app
 $ yarn install
 $ yarn start
 ```
+## Workshop I: Basic React Native page with a FlatList
+1) Look first at the example of our app to see how the card are made and try to recreate your own.
+
+	* Create a basic component: https://reactnative.dev/docs/tutorial 	 	
+
+2) Try to create a FlatList with the card inside of it.
+
+	* Create a FlatList: https://reactnative.dev/docs/flatlist
+
+## Workshop II: Navigate into your app
+
+1) Create a the type of navigation of your choice between: Drawer, BottomBar or even the both of them in the same app.
+
+	* Drawer: https://reactnavigation.org/docs/drawer-based-navigation/
+
+	* BottomBar: https://reactnavigation.org/docs/bottom-tab-navigator/
+
+2) Now make your app navigate to a details page when clicking on your card.
+
+	* DetailsPage: https://reactnavigation.org/docs/navigating/
+
+
