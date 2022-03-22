@@ -4,6 +4,7 @@ import { Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "react-native";
 import Home from "../../screens/Home";
+import AddScreen from "../../screens/Add";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -41,27 +42,10 @@ export default function BottomTabsNavigator() {
           ),
         }}
       />
-      <BottomTabNavigator.Screen
-        name="favorites"
-        component={React.useCallback(
-          () => (
-            <Cmp title="favorites" />
-          ),
-          []
-        )}
-        options={{
-          tabBarIcon: () => <Ionicons name="heart" size={26} color={"green"} />,
-        }}
-      />
 
       <BottomTabNavigator.Screen
         name="add"
-        component={React.useCallback(
-          () => (
-            <Cmp title="added" />
-          ),
-          []
-        )}
+        component={AddScreen}
         options={{
           tabBarIcon: () => <Entypo name="plus" size={30} color={"green"} />,
         }}

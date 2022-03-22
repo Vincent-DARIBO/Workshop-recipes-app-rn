@@ -1,9 +1,20 @@
 import React from "react";
 import { Image, View, Text, StyleSheet } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
+import { useRecepies } from "../providers/ItemsProvider";
+// TODO: trouver comment display les favoris
 export default function Card({ title, category, image }) {
   const [isSelected, setIsSelected] = React.useState(false);
+  const { recepies, favorites, setFavorites } = useRecepies();
+
+  const onPress = () => {
+    if (isSelected) {
+      setIsSelected(false);
+    } else {
+      setIsSelected(true);
+    }
+  };
+
   return (
     <View style={styles.container}>
       <Image source={image} style={styles.image} />
@@ -17,7 +28,7 @@ export default function Card({ title, category, image }) {
           name="heart"
           size={26}
           color={isSelected ? "red" : "#d9d9d9"}
-          onPress={() => setIsSelected((isSelected) => !isSelected)}
+          onPress={() => onPress()}
         />
       </View>
     </View>

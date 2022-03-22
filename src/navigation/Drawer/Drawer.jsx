@@ -10,9 +10,7 @@ const Drawer = createDrawerNavigator();
 //TODO: essayer de faire une bottom banner au lieu du drawer
 export default function DrawerNavigator() {
   return (
-    <Drawer.Navigator
-      drawerContent={() => <DrawerContent />}
-    >
+    <Drawer.Navigator drawerContent={() => <DrawerContent />}>
       <Drawer.Screen
         name="Blank"
         component={BottomTabsNavigator}
