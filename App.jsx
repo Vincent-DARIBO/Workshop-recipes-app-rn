@@ -8,8 +8,8 @@ import { recepies as recepiesProvider } from "./src/data/recepies";
 
 export default function App() {
   const [recepies, setRecepies] = React.useState(recepiesProvider.recepies);
-  const [favorites, setFavorites] = React.useState({});
-  const [myRecepies, setMyRecepies] = React.useState({});
+  const [favorites, setFavorites] = React.useState([]);
+  const [myRecepies, setMyRecepies] = React.useState([]);
   const value = {
     recepies,
     setRecepies,

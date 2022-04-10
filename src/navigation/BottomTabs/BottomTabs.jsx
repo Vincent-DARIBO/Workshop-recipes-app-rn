@@ -5,16 +5,9 @@ import { Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 import { Text, View } from "react-native";
 import Home from "../../screens/Home";
 import AddScreen from "../../screens/Add";
+import MyRecepies from "../../screens/MyRecepies";
 
 const BottomTabNavigator = createBottomTabNavigator();
-
-function Cmp({ title }) {
-  return (
-    <View style={{ alignSelf: "center", justifyContent: "center" }}>
-      <Text>{title}</Text>
-    </View>
-  );
-}
 
 export default function BottomTabsNavigator() {
   return (
@@ -30,12 +23,7 @@ export default function BottomTabsNavigator() {
       />
       <BottomTabNavigator.Screen
         name="my recepies"
-        component={React.useCallback(
-          () => (
-            <Cmp title="recepies" />
-          ),
-          []
-        )}
+        component={MyRecepies}
         options={{
           tabBarIcon: () => (
             <SimpleLineIcons name="notebook" size={26} color={"green"} />
