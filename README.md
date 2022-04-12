@@ -37,7 +37,7 @@ Project is created with:
 ```
 $ open a terminal
 $ clone the repository in your computer using `git clone git@github.com:Vincent-DARIBO/Workshop-recipes-app-rn.git`
-$ cd ../React-Native-training-app
+$ cd ../Workshop-recipes-app-rn
 $ yarn install
 $ yarn start
 ```
