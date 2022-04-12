@@ -23,7 +23,6 @@ export default function MyRecepies() {
           keyExtractor={(item, index) => {
             return (item.id + index).toString();
           }}
-          numColumns={2}
         />
       )}
     </View>
