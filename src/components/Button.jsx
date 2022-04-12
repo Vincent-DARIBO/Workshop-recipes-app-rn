@@ -5,16 +5,7 @@ import { TouchableRipple } from "react-native-paper";
 export default function Button({ title, onPress, children }) {
   return (
     <TouchableRipple style={styles.button} onPress={() => onPress()}>
-      <View
-        style={{
-          flexDirection: "row",
-          justifyContent: "space-between",
-        }}
-      >
-        {children}
-        <View style={{ width: 20 }} />
-        <Text style={styles.title}>{title.toLocaleUpperCase()}</Text>
-      </View>
+    
     </TouchableRipple>
   );
 }

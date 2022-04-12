@@ -10,7 +10,7 @@ export function DrawerContent() {
         icon={() => <Ionicons name="logo-instagram" size={20} color={"blue"} />}
         label="Instagram"
         onPress={() =>
-          Linking.openURL("https://www.instagram.com/emmanuelmacron/")
+          Linking.openURL("https://www.instagram.com/vinz_drb/")
         }
       />
       <DrawerItem
@@ -24,7 +24,7 @@ export function DrawerContent() {
           <FontAwesome name="snapchat-ghost" size={20} color={"blue"} />
         )}
         onPress={() =>
-          Linking.openURL("https://www.snapchat.com/add/emmanuelmacron")
+          Linking.openURL("https://www.snapchat.com/add/mamzelletania?share_id=NzIzNTYw&locale=fr_FR")
         }
       />
     </DrawerContentScrollView>
