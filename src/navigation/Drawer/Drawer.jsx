@@ -2,7 +2,6 @@ import React from "react";
 import { createDrawerNavigator } from "@react-navigation/drawer";
 import { DrawerContent } from "./DrawerContent";
 
-import Blank from "../Blank";
 import BottomTabsNavigator from "../BottomTabs/BottomTabs";
 
 const Drawer = createDrawerNavigator();
@@ -12,7 +11,7 @@ export default function DrawerNavigator() {
   return (
     <Drawer.Navigator drawerContent={() => <DrawerContent />}>
       <Drawer.Screen
-        name="Blank"
+        name="My recepies app"
         component={BottomTabsNavigator}
         // options={{ headerShown: false }}
       />
