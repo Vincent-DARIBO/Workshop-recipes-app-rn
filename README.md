@@ -44,7 +44,8 @@ $ yarn start
 ## Workshop I: Basic React Native page with a FlatList
 1) Look first at the example of our app to see how the card are made and try to recreate your own.
 
-	* Create a basic component: https://reactnative.dev/docs/tutorial 	 	
+	* Create a basic component: https://reactnative.dev/docs/tutorial 
+	* https://www.digitalocean.com/community/tutorials/react-react-native-basic-components	 	
 
 2) Try to create a FlatList with the card inside of it.
 
