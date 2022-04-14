@@ -5,6 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/Drawer/Drawer";
 import RecepiesProvider from "./src/providers/RecepiesProvider";
 import { recepies as recepiesProvider } from "./src/data/recepies";
+import Home from "./src/screens/Home";
 
 export default function App() {
   const [recepies, setRecepies] = React.useState(recepiesProvider.recepies);
@@ -19,11 +20,10 @@ export default function App() {
     setMyRecepies,
   };
   return (
-    <NavigationContainer>
       <RecepiesProvider recepies={value}>
-        <DrawerNavigator />
+        <Home />
       </RecepiesProvider>
-    </NavigationContainer>
+  
   );
 }
 
