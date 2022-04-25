@@ -3,10 +3,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 
 import { Text, View } from "react-native";
-import Home from "../../screens/Home";
 import AddScreen from "../../screens/Add";
 import MyRecepies from "../../screens/MyRecepies";
-import Details from "../../screens/Details";
 import DetailsStack from "../DetailsStack";
 
 const BottomTabNavigator = createBottomTabNavigator();
@@ -20,6 +18,7 @@ export default function BottomTabsNavigator() {
         name="home"
         component={DetailsStack}
         options={{
+          headerBackground: "blue",
           tabBarIcon: () => <Entypo name="home" size={30} color={"green"} />,
         }}
       />

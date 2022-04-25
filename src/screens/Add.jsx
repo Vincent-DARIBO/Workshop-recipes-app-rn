@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   Keyboard,
+  ScrollView,
 } from "react-native";
 
 import { useRecepies } from "../providers/ItemsProvider";
@@ -45,65 +46,74 @@ export default function AddScreen() {
       setDescription("");
       setAreFieldsFilled(true);
     } else setAreFieldsFilled(false);
-
-   
   }
   return (
     <SafeAreaView style={styles.container}>
-      <View style={styles.inputsContainer}>
-        <TextInput
-          style={styles.input}
-          onChangeText={setTitle}
-          value={title}
-          placeholder="Title"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setCategory}
-          value={category}
-          placeholder="Category name"
-        />
-        <TextInput
-          style={styles.input}
-          onChangeText={setDescription}
-          value={description}
-          placeholder="Description"
-        />
-        <View style={styles.imageInput}>
-          <View style={styles.switchContainer}>
-            <Text style={{ right: 10 }}>URL image ?</Text>
-            <Switch
-              trackColor={{ false: "#767577", true: "#81b0ff" }}
-              thumbColor={isUrl ? "white" : "#f4f3f4"}
-              ios_backgroundColor="#3e3e3e"
-              onValueChange={toggleSwitch}
-              value={isUrl}
-              style={{
-                right: 10,
-              }}
-            />
+      <ScrollView contentContainerStyle={styles.scrollView} centerContent>
+        <View style={styles.inputsContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setTitle}
+            value={title}
+            placeholder="Title"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setCategory}
+            value={category}
+            placeholder="Category name"
+          />
+          <TextInput
+            style={styles.input}
+            onChangeText={setDescription}
+            value={description}
+            placeholder="Description"
+          />
+          <View style={styles.imageInput}>
+            <View style={styles.switchContainer}>
+              <Text style={{ right: 10 }}>URL image ?</Text>
+              <Switch
+                trackColor={{ false: "#767577", true: "#81b0ff" }}
+                thumbColor={isUrl ? "white" : "#f4f3f4"}
+                ios_backgroundColor="#3e3e3e"
+                onValueChange={toggleSwitch}
+                value={isUrl}
+                style={{
+                  right: 10,
+                }}
+              />
+            </View>
+            <View style={{ alignItems: "center" }}>
+              <TextInput
+                style={styles.input}
+                onChangeText={setImage}
+                value={image}
+                placeholder={isUrl ? "Url" : "Path"}
+              />
+            </View>
           </View>
-          <View style={{ alignItems: "center" }}>
-            <TextInput
-              style={styles.input}
-              onChangeText={setImage}
-              value={image}
-              placeholder={isUrl ? "Url" : "Path"}
-            />
-          </View>
+          {!areFieldsFilled ? (
+            <Text style={{ color: "red" }}>You must fill all the fields</Text>
+          ) : null}
         </View>
-        {!areFieldsFilled ? (
-          <Text style={{ color: "red" }}>You must fill all the fields</Text>
-        ) : null}
-      </View>
-      <TouchableOpacity style={styles.button} onPress={() => onAddPress()}>
-        <Text style={{ color: "white", fontSize: 15 }}>Add</Text>
-      </TouchableOpacity>
+        <TouchableOpacity style={styles.button} onPress={() => onAddPress()}>
+          <Text style={{ color: "white", fontSize: 15 }}>Add</Text>
+        </TouchableOpacity>
+      </ScrollView>
     </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+  scrollView: {
+    padding: 20,
+    justifyContent: "space-between",
+    alignItems: "center",
+    flex: 1,
+  },
   input: {
     padding: 10,
     height: 50,
@@ -118,12 +128,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-evenly",
     alignItems: "center",
-  },
-  container: {
-    alignItems: "center",
-    justifyContent: "space-between",
-    padding: 20,
-    flex: 1,
   },
   imageInput: {
     width: "100%",

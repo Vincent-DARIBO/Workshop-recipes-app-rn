@@ -1,11 +1,12 @@
 import "react-native-gesture-handler";
 import * as React from "react";
-import { StyleSheet } from "react-native";
+import { StyleSheet, Platform } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import DrawerNavigator from "./src/navigation/Drawer/Drawer";
 import RecepiesProvider from "./src/providers/RecepiesProvider";
 import { recepies as recepiesProvider } from "./src/data/recepies";
 import Home from "./src/screens/Home";
+import AddScreen from "./src/screens/Add";
 
 export default function App() {
   const [recepies, setRecepies] = React.useState(recepiesProvider.recepies);
@@ -20,10 +21,11 @@ export default function App() {
     setMyRecepies,
   };
   return (
+    <NavigationContainer>
       <RecepiesProvider recepies={value}>
-        <Home />
+        <DrawerNavigator />
       </RecepiesProvider>
-  
+    </NavigationContainer>
   );
 }
 
