@@ -2,10 +2,10 @@ import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Entypo, Ionicons, SimpleLineIcons } from "@expo/vector-icons";
 
-import { Text, View } from "react-native";
 import AddScreen from "../../screens/Add";
 import MyRecepies from "../../screens/MyRecepies";
-import DetailsStack from "../DetailsStack";
+import FavoritesRecepiesScreen from "../../screens/FavoritesRecepies";
+import Home from "../../screens/Home";
 
 const BottomTabNavigator = createBottomTabNavigator();
 
@@ -15,15 +15,15 @@ export default function BottomTabsNavigator() {
       screenOptions={{ tabBarActiveTintColor: "green", headerShown: false }}
     >
       <BottomTabNavigator.Screen
-        name="home"
-        component={DetailsStack}
+        name="Home"
+        component={Home}
         options={{
           headerBackground: "blue",
           tabBarIcon: () => <Entypo name="home" size={30} color={"green"} />,
         }}
       />
       <BottomTabNavigator.Screen
-        name="my recepies"
+        name="My recepies"
         component={MyRecepies}
         options={{
           tabBarIcon: () => (
@@ -33,7 +33,14 @@ export default function BottomTabsNavigator() {
       />
 
       <BottomTabNavigator.Screen
-        name="add"
+        name="Favorites"
+        component={FavoritesRecepiesScreen}
+        options={{
+          tabBarIcon: () => <Entypo name="heart" size={30} color={"green"} />,
+        }}
+      />
+      <BottomTabNavigator.Screen
+        name="Add"
         component={AddScreen}
         options={{
           tabBarIcon: () => <Entypo name="plus" size={30} color={"green"} />,

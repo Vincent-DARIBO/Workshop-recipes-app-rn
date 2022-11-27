@@ -1,26 +1,32 @@
-import React from "react";
-import {
-  SafeAreaView,
-  View,
-  Switch,
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  TouchableWithoutFeedback,
-} from "react-native";
-import {
-  MaterialCommunityIcons,
-  Feather,
-  MaterialIcons,
-  Ionicons,
-  AntDesign,
-} from "@expo/vector-icons";
-import { useRecepies } from "../providers/ItemsProvider";
-import Button from "../components/Button";
+import React from 'react';
+import { SafeAreaView, View, Image, StyleSheet, Text } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
+import { useRecepies } from '../providers/ItemsProvider';
+import Button from '../components/Button';
 
 export default function Details({ route }) {
   const { recepie } = route.params;
+  const { recepies, setRecepies} = useRecepies();
+  const [isFav, setIsFav] = React.useState(recepie.isFav)
+
+  const addToFav = () => {
+    setRecepies(
+      recepies.map((item) =>
+        item.title === recepie.title ? { ...item, isFav: true } : item
+      )
+    );
+    setIsFav(true);
+  };
+
+  const removeFromFav = () => {
+    setRecepies(
+      recepies.map((item) =>
+        item.title === recepie.title ? { ...item, isFav: false } : item
+      )
+    );
+    setIsFav(false);
+  };
+  const title = !isFav ? 'Add to' : 'Remove from';
   return (
     <SafeAreaView style={styles.container}>
       <View>
@@ -34,11 +40,19 @@ export default function Details({ route }) {
           </View>
         </View>
       </View>
-      <View style={styles.button}>
-        <Button title="Add to favorite" onPress={() => console.log("onpresse")}>
-          <Ionicons name="heart" size={20} color="white" />
-        </Button>
-      </View>
+        <View style={styles.button}>
+          <Button
+            title={title + ' favorite'}
+            onPress={() => (isFav ? removeFromFav() : addToFav())}
+            style={{backgroundColor : isFav ? "red" : "green"}}
+          >
+            <Ionicons
+              name={isFav ? 'trash' : 'heart'}
+              size={20}
+              color="white"
+            />
+          </Button>
+        </View>
     </SafeAreaView>
   );
 }
@@ -46,19 +60,19 @@ export default function Details({ route }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   image: {
-    width: "100%",
+    width: '100%',
     height: 200,
   },
   titleContainer: {
     marginTop: 5,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
   },
   title: {
-    fontWeight: "bold",
-    fontStyle: "italic",
+    fontWeight: 'bold',
+    fontStyle: 'italic',
     fontSize: 20,
   },
   descriptionContainer: {
@@ -71,24 +85,24 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
   },
   row: {
-    flexDirection: "row",
+    flexDirection: 'row',
   },
   modal: {
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     marginTop: 5,
-    alignItems: "center",
+    alignItems: 'center',
   },
   more: {
     marginVertical: 5,
   },
   switch: {
-    alignItems: "center",
-    justifyContent: "space-between",
+    alignItems: 'center',
+    justifyContent: 'space-between',
     width: 80,
   },
   button: {
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
     marginBottom: 10,
     bottom: 10,
   },

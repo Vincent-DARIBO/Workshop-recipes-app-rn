@@ -9,8 +9,9 @@ import {
   TouchableOpacity,
   Keyboard,
   ScrollView,
+  Pressable,
 } from "react-native";
-
+import * as ImagePicker from 'expo-image-picker';
 import { useRecepies } from "../providers/ItemsProvider";
 
 export default function AddScreen() {
@@ -24,6 +25,19 @@ export default function AddScreen() {
 
   function toggleSwitch() {
     setIsUrl((isUrl) => !isUrl);
+  }
+  async function onImportFromGalleryPress() {
+    let result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+
+    if (!result.canceled) {
+      setImage(result.assets[0].uri);
+    }
   }
 
   function onAddPress() {
@@ -71,17 +85,9 @@ export default function AddScreen() {
           />
           <View style={styles.imageInput}>
             <View style={styles.switchContainer}>
-              <Text style={{ right: 10 }}>URL image ?</Text>
-              <Switch
-                trackColor={{ false: "#767577", true: "#81b0ff" }}
-                thumbColor={isUrl ? "white" : "#f4f3f4"}
-                ios_backgroundColor="#3e3e3e"
-                onValueChange={toggleSwitch}
-                value={isUrl}
-                style={{
-                  right: 10,
-                }}
-              />
+              <Pressable onPress={() => onImportFromGalleryPress()}>
+              <Text style={{ right: 10, color: "green" }}>Import from gallery</Text>
+              </Pressable>
             </View>
             <View style={{ alignItems: "center" }}>
               <TextInput

@@ -2,9 +2,9 @@ import React from "react";
 import { Text, StyleSheet, View } from "react-native";
 import { TouchableRipple } from "react-native-paper";
 
-export default function Button({ title, onPress, children }) {
+export default function Button({ title, onPress, children,style }) {
   return (
-    <TouchableRipple style={styles.button} onPress={() => onPress()}>
+    <TouchableRipple style={{...styles.button, ...style}} onPress={() => onPress()}>
       <View
         style={{
           flexDirection: "row",
