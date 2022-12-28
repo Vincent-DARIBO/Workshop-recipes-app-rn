@@ -44,7 +44,7 @@ export default function AddScreen() {
   React.useEffect(() => {
     setTimeout(onDismissSnackBar, 2000);
   }, [visible]);
-  console.log({ visible });
+
   async function onImportFromGalleryPress() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -63,6 +63,7 @@ export default function AddScreen() {
       id: 1,
       title,
       category,
+      description,
       isFav: false,
       imagePath: {
         uri: image,

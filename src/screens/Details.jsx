@@ -1,8 +1,10 @@
 import React from 'react';
 import { SafeAreaView, View, Image, StyleSheet, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
+
 import { useRecepies } from '../providers/ItemsProvider';
 import Button from '../components/Button';
+import Badge from '../components/Badge'
 
 export default function Details({ route }) {
   const { recepie } = route.params;
@@ -38,6 +40,7 @@ export default function Details({ route }) {
           <View style={styles.descriptionContainer}>
             <Text style={styles.description}>{recepie.description}</Text>
           </View>
+        <Badge title={`#${recepie.category}`}/>
         </View>
       </View>
         <View style={styles.button}>
