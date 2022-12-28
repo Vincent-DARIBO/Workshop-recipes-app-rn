@@ -12,8 +12,9 @@ export default function MainStack() {
       <Stack.Screen
         component={BottomTabsNavigator}
         name="BottomTabs"
+        options={{headerShown : false}}
       />
-      <Stack.Screen component={Details} name="Details" />
+      <Stack.Screen component={Details} name="Details" options={{headerTintColor: 'green'}} />
     </Stack.Navigator>
   );
 }
