@@ -10,29 +10,34 @@ import {
   Keyboard,
   ScrollView,
   Pressable,
+  Image,
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRecepies } from '../providers/ItemsProvider';
-import { Snackbar } from 'react-native-paper';
+import { Divider, Menu, Snackbar } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons';
 
 import Toast from '../components/Toast';
 import Button from '../components/Button';
+import ElevatedView from 'react-native-elevated-view';
 
 export default function AddScreen() {
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('');
   const [image, setImage] = React.useState('');
   const [description, setDescription] = React.useState('');
-  const [isImported, setIsImported] = React.useState(false);
+  const [isMenuShown, setIsMenuShown] = React.useState(false);
   const [areFieldsFilled, setAreFieldsFilled] = React.useState(true);
   const [visible, setVisible] = React.useState(false);
   const categoryRef = useRef(null);
   const descriptionRef = useRef(null);
   const { recepies, setRecepies, myRecepies, setMyRecepies } = useRecepies();
 
-  function toggleSwitch() {
-    setIsImported((isUrl) => !isUrl);
+  function openMenu() {
+    setIsMenuShown(true);
+  }
+  function closeMenu() {
+    setIsMenuShown(false);
   }
   function onDismissSnackBar() {
     setVisible((visible) => false);
@@ -107,18 +112,40 @@ export default function AddScreen() {
             placeholder="Description"
             ref={descriptionRef}
           />
-
-          <Button
-            title="Import image"
-            onPress={() => onImportFromGalleryPress()}
-            style={{
-              ...styles.input,
-              backgroundColor: null,
-              justifyContent: 'center',
-            }}
-            textStyle={{ color: 'green' }}
-          />
-
+          <>
+            <Button
+              title="Import image"
+              onPress={() => onImportFromGalleryPress()}
+              style={{
+                ...styles.input,
+                backgroundColor: null,
+                justifyContent: 'center',
+              }}
+              textStyle={{ color: 'green' }}
+            />
+            {image && (
+              <Pressable
+                onLongPress={() => openMenu()}
+                onPress={() => closeMenu()}
+              >
+                <Image source={{ uri: image }} style={styles.image} />
+                {isMenuShown && (
+                  <ElevatedView elevation={3} style={styles.menu}>
+                    <Pressable
+                      onPress={() => {
+                        setImage('');
+                        closeMenu();
+                      }}
+                    >
+                      <Text style={{ color: 'grey', alignSelf: 'center' }}>
+                        Delete
+                      </Text>
+                    </Pressable>
+                  </ElevatedView>
+                )}
+              </Pressable>
+            )}
+          </>
           {!areFieldsFilled ? (
             <Text style={{ color: 'red' }}>You must fill all the fields</Text>
           ) : null}
@@ -162,15 +189,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-evenly',
     alignItems: 'center',
   },
-  imageInput: {
-    width: '100%',
-    marginVertical: 10,
-  },
-  switchContainer: {
-    alignItems: 'center',
-    flexDirection: 'row',
-    justifyContent: 'flex-end',
-  },
   button: {
     backgroundColor: 'green',
     borderRadius: 10,
@@ -178,5 +196,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 100,
     height: 50,
+  },
+  image: {
+    height: 150,
+    width: 150,
+  },
+  menu: {
+    backgroundColor: 'white',
+    position: 'absolute',
+    top: 0,
+    right: 0,
+    width: 80,
+    height: 30,
+    justifyContent: 'center',
   },
 });
