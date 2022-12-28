@@ -1,18 +1,19 @@
 import React from "react";
-import { View, FlatList, Text, StyleSheet } from "react-native";
+import { View, FlatList, Text, StyleSheet, SafeAreaView } from "react-native";
 import Card from "../components/Card";
 import { useRecepies } from "../providers/ItemsProvider";
 
 export default function MyRecepies() {
-  const { myRecepies } = useRecepies();
+  const { myRecepies, ...rest } = useRecepies();
 
   const renderItem = ({ item }) => (
     <Card title={item.title} category={item.category} image={item.imagePath} />
   );
-
+  
+  console.log(myRecepies)
   return (
-    <View>
-      {myRecepies.length == 0 ? (
+    <SafeAreaView style={{flex: 1}}>
+      {myRecepies.length === 0 ? (
         <View style={styles.container}>
           <Text>You have no recepie yet</Text>
         </View>
@@ -26,7 +27,7 @@ export default function MyRecepies() {
           numColumns={2}
         />
       )}
-    </View>
+    </SafeAreaView>
   );
 }
 

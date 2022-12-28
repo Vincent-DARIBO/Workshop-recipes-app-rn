@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from 'react';
 import {
   SafeAreaView,
   StyleSheet,
@@ -10,22 +10,41 @@ import {
   Keyboard,
   ScrollView,
   Pressable,
-} from "react-native";
+} from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
-import { useRecepies } from "../providers/ItemsProvider";
+import { useRecepies } from '../providers/ItemsProvider';
+import { Snackbar } from 'react-native-paper';
+import { AntDesign } from '@expo/vector-icons';
+
+import Toast from '../components/Toast';
+import Button from '../components/Button';
 
 export default function AddScreen() {
-  const [title, setTitle] = React.useState("");
-  const [category, setCategory] = React.useState("");
-  const [image, setImage] = React.useState("");
-  const [description, setDescription] = React.useState("");
-  const [isUrl, setIsUrl] = React.useState(false);
+  const [title, setTitle] = React.useState('');
+  const [category, setCategory] = React.useState('');
+  const [image, setImage] = React.useState('');
+  const [description, setDescription] = React.useState('');
+  const [isImported, setIsImported] = React.useState(false);
   const [areFieldsFilled, setAreFieldsFilled] = React.useState(true);
+  const [visible, setVisible] = React.useState(false);
+  const categoryRef = useRef(null);
+  const descriptionRef = useRef(null);
   const { recepies, setRecepies, myRecepies, setMyRecepies } = useRecepies();
 
   function toggleSwitch() {
-    setIsUrl((isUrl) => !isUrl);
+    setIsImported((isUrl) => !isUrl);
   }
+  function onDismissSnackBar() {
+    setVisible((visible) => false);
+  }
+  function showSnackBar() {
+    setVisible((visible) => true);
+  }
+
+  React.useEffect(() => {
+    setTimeout(onDismissSnackBar, 2000);
+  }, [visible]);
+  console.log({ visible });
   async function onImportFromGalleryPress() {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -33,7 +52,6 @@ export default function AddScreen() {
       aspect: [4, 3],
       quality: 1,
     });
-
 
     if (!result.canceled) {
       setImage(result.assets[0].uri);
@@ -54,11 +72,12 @@ export default function AddScreen() {
       setRecepies([...recepies, newRecepie]);
       setMyRecepies([...myRecepies, newRecepie]);
       Keyboard.dismiss();
-      setTitle("");
-      setCategory("");
-      setImage("");
-      setDescription("");
+      setTitle('');
+      setCategory('');
+      setImage('');
+      setDescription('');
       setAreFieldsFilled(true);
+      showSnackBar();
     } else setAreFieldsFilled(false);
   }
   return (
@@ -70,40 +89,47 @@ export default function AddScreen() {
             onChangeText={setTitle}
             value={title}
             placeholder="Title"
+            onSubmitEditing={() => categoryRef.current.focus()}
           />
           <TextInput
             style={styles.input}
             onChangeText={setCategory}
             value={category}
             placeholder="Category name"
+            ref={categoryRef}
+            onSubmitEditing={() => descriptionRef.current.focus()}
           />
           <TextInput
             style={styles.input}
             onChangeText={setDescription}
             value={description}
             placeholder="Description"
+            ref={descriptionRef}
           />
-          <View style={styles.imageInput}>
-            <View style={styles.switchContainer}>
-              <Pressable onPress={() => onImportFromGalleryPress()}>
-              <Text style={{ right: 10, color: "green" }}>Import from gallery</Text>
-              </Pressable>
-            </View>
-            <View style={{ alignItems: "center" }}>
-              <TextInput
-                style={styles.input}
-                onChangeText={setImage}
-                value={image}
-                placeholder={isUrl ? "Url" : "Path"}
-              />
-            </View>
-          </View>
+
+          <Button
+            title="Import image"
+            onPress={() => onImportFromGalleryPress()}
+            style={{
+              ...styles.input,
+              backgroundColor: null,
+              justifyContent: 'center',
+            }}
+            textStyle={{ color: 'green' }}
+          />
+
           {!areFieldsFilled ? (
-            <Text style={{ color: "red" }}>You must fill all the fields</Text>
+            <Text style={{ color: 'red' }}>You must fill all the fields</Text>
           ) : null}
         </View>
+        <Toast
+          text="Recepie successfully added"
+          visible={visible}
+          icon={<AntDesign name="checkcircle" size={20} color="green" />}
+        />
+
         <TouchableOpacity style={styles.button} onPress={() => onAddPress()}>
-          <Text style={{ color: "white", fontSize: 15 }}>Add</Text>
+          <Text style={{ color: 'white', fontSize: 15 }}>Add</Text>
         </TouchableOpacity>
       </ScrollView>
     </SafeAreaView>
@@ -116,39 +142,39 @@ const styles = StyleSheet.create({
   },
   scrollView: {
     padding: 20,
-    justifyContent: "space-between",
-    alignItems: "center",
+    justifyContent: 'space-between',
+    alignItems: 'center',
     flex: 1,
   },
   input: {
     padding: 10,
     height: 50,
-    width: "90%",
-    borderColor: "grey",
+    width: '90%',
+    borderColor: 'grey',
     borderWidth: 1,
     borderRadius: 15,
     marginVertical: 20,
   },
   inputsContainer: {
-    height: "70%",
-    width: "100%",
-    justifyContent: "space-evenly",
-    alignItems: "center",
+    height: '70%',
+    width: '100%',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   imageInput: {
-    width: "100%",
+    width: '100%',
     marginVertical: 10,
   },
   switchContainer: {
-    alignItems: "center",
-    flexDirection: "row",
-    justifyContent: "flex-end",
+    alignItems: 'center',
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
   },
   button: {
-    backgroundColor: "green",
+    backgroundColor: 'green',
     borderRadius: 10,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
     width: 100,
     height: 50,
   },
