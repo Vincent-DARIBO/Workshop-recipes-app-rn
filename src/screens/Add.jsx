@@ -20,32 +20,24 @@ import { AntDesign } from '@expo/vector-icons';
 import Toast from '../components/Toast';
 import Button from '../components/Button';
 import ElevatedView from 'react-native-elevated-view';
+import useToggleMenu from '../hooks/useToggleMenu';
+import useSnackBarState from '../hooks/useSnackBarState';
 
 export default function AddScreen() {
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('');
   const [image, setImage] = React.useState('');
   const [description, setDescription] = React.useState('');
-  const [isMenuShown, setIsMenuShown] = React.useState(false);
   const [areFieldsFilled, setAreFieldsFilled] = React.useState(true);
-  const [visible, setVisible] = React.useState(false);
+
+
   const categoryRef = useRef(null);
   const descriptionRef = useRef(null);
   const { recepies, setRecepies, myRecepies, setMyRecepies } = useRecepies();
+  const {visible,  showSnackBar, onDismissSnackBar} = useSnackBarState()
+  const {isMenuShown, openMenu, closeMenu} = useToggleMenu()
 
-  function openMenu() {
-    setIsMenuShown(true);
-  }
-  function closeMenu() {
-    setIsMenuShown(false);
-  }
-  function onDismissSnackBar() {
-    setVisible((visible) => false);
-  }
-  function showSnackBar() {
-    setVisible((visible) => true);
-  }
-
+ 
   React.useEffect(() => {
     setTimeout(onDismissSnackBar, 2000);
   }, [visible]);
