@@ -2,11 +2,14 @@ import React from 'react';
 import { Text, StyleSheet, View } from 'react-native';
 import { TouchableRipple } from 'react-native-paper';
 
+import { BUTTON } from '../utils/tests/testIDs';
+
 export default function Button({ title = '', onPress, children, style, textStyle = {} }) {
   return (
     <TouchableRipple
       style={{ ...styles.button, ...style }}
       onPress={() => onPress()}
+      testID={BUTTON}
     >
       <View
         style={{
