@@ -8,9 +8,8 @@ it('Should render the toast if visible prop is true', () => {
   const { queryByText, queryByTestId } = render(
     <Toast
       visible
-      test="ceci est un test"
+      text="ceci est un test"
       icon={<View style={{ height: 10, width: 10 }} />}
-      style={{ alignItems: 'center' }}
     />
   );
 
