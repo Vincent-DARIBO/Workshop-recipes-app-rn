@@ -2,7 +2,7 @@ import React from 'react';
 import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { useRecepies } from '../providers/ItemsProvider';
-import { CARD } from '../utils/tests/testIDs';
+import { CARD, CARD_ICON, CARD_IMAGE } from '../utils/tests/testIDs';
 // TODO: trouver comment display les favoris
 
 export default function Card({
@@ -41,7 +41,7 @@ export default function Card({
       activeOpacity={0.5}
       testID={CARD}
     >
-      <Image source={image} style={styles.image} />
+      <Image source={image} style={styles.image} testID={CARD_IMAGE}/>
 
       <Text style={styles.title} numberOfLines={2}>
         {title}
@@ -54,6 +54,7 @@ export default function Card({
             size={26}
             color={isSelected ? 'red' : '#d9d9d9'}
             onPress={() => onHeartPress()}
+            testID={CARD_ICON}
           />
         )}
       </View>

@@ -4,3 +4,6 @@ export const BUTTON = 'BUTTON';
 export const DETAILS_SCREEN_IMAGE = 'DETAILS_SCREEN_IMAGE';
 export const HOME_SCREEN = 'HOME_SCREEN';
 export const CARD = 'CARD';
+export const CARD_ICON = "CARD_ICON";
+export const CARD_IMAGE = "CARD_IMAGE";
+export const BADGE = 'BADGE';

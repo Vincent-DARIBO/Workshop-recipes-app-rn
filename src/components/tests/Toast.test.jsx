@@ -21,7 +21,7 @@ it('Should render the toast if visible prop is true', () => {
 });
 
 it('Should not render the toast', () => {
-  const { queryByTestId } = render(
+  const { queryByTestId, queryByText } = render(
     <Toast
       text="ceci est un test"
       visible={false}
@@ -30,4 +30,7 @@ it('Should not render the toast', () => {
   );
 
   expect(queryByTestId(TOAST)).toBeNull();
+
+  // Should not display the text
+  expect(queryByText('ceci est un test')).toBeNull();
 });
