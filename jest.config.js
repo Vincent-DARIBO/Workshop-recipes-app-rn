@@ -11,7 +11,7 @@ const config = {
   transform: {
     '^.+\\.jsx$': 'babel-jest',
   },
-  setupFiles: ['./node_modules/react-native-gesture-handler/jestSetup.js'],
+  setupFilesAfterEnv: ['./node_modules/react-native-gesture-handler/jestSetup.js', './setup-jest.js'],
   testEnvironment: 'node',
 };
 

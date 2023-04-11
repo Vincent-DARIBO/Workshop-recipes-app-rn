@@ -3,11 +3,8 @@ import { render, fireEvent } from '../../utils/tests/testUtils';
 import Card from '../Card';
 import { CARD, CARD_ICON, CARD_IMAGE } from '../../utils/tests/testIDs';
 
-import { toHaveStyle } from "@testing-library/jest-native";
 
 describe('Card component test', () => {
-    expect.extend({ toHaveStyle });
-
     it('Should render the card', async () => {
         const onCardPressMock = jest.fn();
         const { queryByTestId, queryByText, findByTestId } = render(
