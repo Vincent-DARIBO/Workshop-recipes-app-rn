@@ -37,7 +37,7 @@ describe('Card component test', () => {
         expect(onCardPressMock).toHaveBeenCalledTimes(1)
     })
     it('Should change the icon color when icon is pressed', async () => {
-        const { queryByTestId, queryByText, findByTestId } = render(
+        const { findByTestId } = render(
             <Card
                 title="Card title"
                 category="cake"
