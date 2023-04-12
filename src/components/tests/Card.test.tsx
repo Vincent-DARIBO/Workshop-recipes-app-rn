@@ -70,4 +70,22 @@ describe('Card component test', () => {
 
         expect(queryByTestId(CARD_ICON)).toBeNull();
     })
+
+    it('Should display a red heart icon', async () => {
+        const { queryByTestId, findByTestId } = render(
+            <Card
+                title="Card title"
+                category="cake"
+                image={require("../../../assets/cookie.jpg")}
+                onCardPress={() => void 0}
+                isFav
+                canLike
+            />)
+
+        // Should render the card heart icon with red color
+        const heartIcon = await findByTestId(CARD_ICON);
+        expect(heartIcon).not.toBeNull();
+        expect(heartIcon).toHaveStyle({ color: 'red' })
+
+    })
 })
