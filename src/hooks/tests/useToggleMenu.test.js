@@ -7,7 +7,6 @@ describe('useToggle menu hook tests', () => {
 
         const {result} = renderHook(() => useToggleMenu())
 
-
         expect(result.current.isMenuShown).toBe(false)
 
         // Should set isMenuShown to true

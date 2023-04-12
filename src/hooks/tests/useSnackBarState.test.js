@@ -11,6 +11,7 @@ it('Should toggle visible state', () => {
   act(() => {
     result.current.showSnackBar()
   })
+  expect(result.current.visible).toBe(true)
 
   expect(result.current.visible).toBeTruthy()
 
