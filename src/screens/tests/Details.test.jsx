@@ -60,6 +60,12 @@ describe('Details screen component tests', () => {
         expect(queryByText("REMOVE FROM FAVORITE")).not.toBeNull();
 
 
+         // Pressing the button agai
+         fireEvent.press(button);
+         expect(button).toHaveStyle({ backgroundColor: "green" })
+         expect(queryByText("ADD TO FAVORITE")).not.toBeNull();
+
+
 
     })
 
