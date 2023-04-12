@@ -44,6 +44,9 @@ $ yarn start
 ## Workshop I: Test your mobile app with Jest
 
 1. Installation de Jest
+	* Create a basic component: https://reactnative.dev/docs/tutorial 
+	* https://www.digitalocean.com/community/tutorials/react-react-native-basic-components	 	
+	* Create a card simple tutorial: https://reactnativeelements.com/docs/2.3.2/card	 	
 
       * Install Node.js and NPM: Jest is a JavaScript library that runs on Node.js. So make sure to install the latest version of Node.js and NPM on your         computer if you haven't already. You can download Node.js from the official website https://nodejs.org/en/.
       
