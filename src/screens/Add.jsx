@@ -61,7 +61,6 @@ export default function AddScreen() {
     });
 
     if (!result.canceled) {
-      console.log(result?.canceled)
       setImage(result.assets[0].uri);
     }
   }
@@ -77,6 +76,7 @@ export default function AddScreen() {
         uri: image,
       },
     };
+
     if (title.length && category.length && image.length && description.length) {
       setRecepies([...recepies, newRecepie]);
       setMyRecepies([...myRecepies, newRecepie]);
