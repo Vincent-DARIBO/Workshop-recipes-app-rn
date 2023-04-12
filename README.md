@@ -46,6 +46,7 @@ $ yarn start
 
 	* Create a basic component: https://reactnative.dev/docs/tutorial 
 	* https://www.digitalocean.com/community/tutorials/react-react-native-basic-components	 	
+	* Create a card simple tutorial: https://reactnativeelements.com/docs/2.3.2/card	 	
 
 2) Try to create a FlatList with the card inside of it.
 
