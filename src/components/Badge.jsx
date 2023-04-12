@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Pressable, Text } from 'react-native';
 import ElevatedView from 'react-native-elevated-view';
+import { BADGE } from '../utils/tests/testIDs';
 
 export default function ElevatedBadge({
   icon,
@@ -21,6 +22,7 @@ export default function ElevatedBadge({
         paddingHorizontal: 10,
         ...style,
       }}
+      testID={BADGE}
     >
       {icon}
       <Text

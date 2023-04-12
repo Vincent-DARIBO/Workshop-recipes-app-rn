@@ -5,6 +5,7 @@ import { Ionicons } from '@expo/vector-icons';
 import { useRecepies } from '../providers/ItemsProvider';
 import Button from '../components/Button';
 import Badge from '../components/Badge'
+import { DETAILS_SCREEN, DETAILS_SCREEN_ICON, DETAILS_SCREEN_IMAGE } from '../utils/tests/testIDs';
 
 export default function Details({ route }) {
   const { recepie } = route.params;
@@ -30,9 +31,9 @@ export default function Details({ route }) {
   };
   const title = !isFav ? 'Add to' : 'Remove from';
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID={DETAILS_SCREEN}>
       <View>
-        <Image source={recepie.imagePath} style={styles.image} />
+        <Image source={recepie.imagePath} style={styles.image} testID={DETAILS_SCREEN_IMAGE}/>
         <View style={styles.padding}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{recepie.title}</Text>

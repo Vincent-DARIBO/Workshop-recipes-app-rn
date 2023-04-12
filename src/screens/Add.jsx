@@ -14,37 +14,39 @@ import {
 } from 'react-native';
 import * as ImagePicker from 'expo-image-picker';
 import { useRecepies } from '../providers/ItemsProvider';
-import { Divider, Menu, Snackbar } from 'react-native-paper';
 import { AntDesign } from '@expo/vector-icons';
+import ElevatedView from 'react-native-elevated-view';
 
 import Toast from '../components/Toast';
 import Button from '../components/Button';
-import ElevatedView from 'react-native-elevated-view';
+import useToggleMenu from '../hooks/useToggleMenu';
+import useSnackBarState from '../hooks/useSnackBarState';
+import {
+  ADD_SCREEN,
+  ADD_SCREEN_ADD_BUTTON,
+  ADD_SCREEN_CATEGORY_INPUT,
+  ADD_SCREEN_CLOSE_MENU_PRESSABLE,
+  ADD_SCREEN_DESCRIPTION_INPUT,
+  ADD_SCREEN_IMAGE,
+  ADD_SCREEN_IMAGE_PRESSABLE,
+  ADD_SCREEN_IMPORT_IMAGE_BUTTON,
+  ADD_SCREEN_TITLE_INPUT
+} from '../utils/tests/testIDs';
 
 export default function AddScreen() {
   const [title, setTitle] = React.useState('');
   const [category, setCategory] = React.useState('');
   const [image, setImage] = React.useState('');
   const [description, setDescription] = React.useState('');
-  const [isMenuShown, setIsMenuShown] = React.useState(false);
   const [areFieldsFilled, setAreFieldsFilled] = React.useState(true);
-  const [visible, setVisible] = React.useState(false);
+
+
   const categoryRef = useRef(null);
   const descriptionRef = useRef(null);
   const { recepies, setRecepies, myRecepies, setMyRecepies } = useRecepies();
+  const { visible, showSnackBar, onDismissSnackBar } = useSnackBarState()
+  const { isMenuShown, openMenu, closeMenu } = useToggleMenu()
 
-  function openMenu() {
-    setIsMenuShown(true);
-  }
-  function closeMenu() {
-    setIsMenuShown(false);
-  }
-  function onDismissSnackBar() {
-    setVisible((visible) => false);
-  }
-  function showSnackBar() {
-    setVisible((visible) => true);
-  }
 
   React.useEffect(() => {
     setTimeout(onDismissSnackBar, 2000);
@@ -52,7 +54,7 @@ export default function AddScreen() {
 
   async function onImportFromGalleryPress() {
     let result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.All,
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
@@ -74,6 +76,7 @@ export default function AddScreen() {
         uri: image,
       },
     };
+
     if (title.length && category.length && image.length && description.length) {
       setRecepies([...recepies, newRecepie]);
       setMyRecepies([...myRecepies, newRecepie]);
@@ -88,7 +91,7 @@ export default function AddScreen() {
   }
   return (
     <SafeAreaView style={styles.container}>
-      <ScrollView contentContainerStyle={styles.scrollView} centerContent>
+      <ScrollView contentContainerStyle={styles.scrollView} centerContent testID={ADD_SCREEN} >
         <View style={styles.inputsContainer}>
           <TextInput
             style={styles.input}
@@ -96,6 +99,7 @@ export default function AddScreen() {
             value={title}
             placeholder="Title"
             onSubmitEditing={() => categoryRef.current.focus()}
+            testID={ADD_SCREEN_TITLE_INPUT}
           />
           <TextInput
             style={styles.input}
@@ -104,6 +108,7 @@ export default function AddScreen() {
             placeholder="Category name"
             ref={categoryRef}
             onSubmitEditing={() => descriptionRef.current.focus()}
+            testID={ADD_SCREEN_CATEGORY_INPUT}
           />
           <TextInput
             style={styles.input}
@@ -111,6 +116,7 @@ export default function AddScreen() {
             value={description}
             placeholder="Description"
             ref={descriptionRef}
+            testID={ADD_SCREEN_DESCRIPTION_INPUT}
           />
           <>
             <Button
@@ -122,13 +128,15 @@ export default function AddScreen() {
                 justifyContent: 'center',
               }}
               textStyle={{ color: 'green' }}
+
             />
             {image && (
               <Pressable
                 onLongPress={() => openMenu()}
                 onPress={() => closeMenu()}
+                testID={ADD_SCREEN_IMAGE_PRESSABLE}
               >
-                <Image source={{ uri: image }} style={styles.image} />
+                <Image source={{ uri: image }} style={styles.image} testID={ADD_SCREEN_IMAGE} />
                 {isMenuShown && (
                   <ElevatedView elevation={3} style={styles.menu}>
                     <Pressable
@@ -136,6 +144,7 @@ export default function AddScreen() {
                         setImage('');
                         closeMenu();
                       }}
+                      testID={ADD_SCREEN_CLOSE_MENU_PRESSABLE}
                     >
                       <Text style={{ color: 'grey', alignSelf: 'center' }}>
                         Delete
@@ -153,10 +162,11 @@ export default function AddScreen() {
         <Toast
           text="Recepie successfully added"
           visible={visible}
-          icon={<AntDesign name="checkcircle" size={20} color="green" />}
+          icon={<AntDesign name="checkcircle" size={20} color="green"
+          />}
         />
 
-        <TouchableOpacity style={styles.button} onPress={() => onAddPress()}>
+        <TouchableOpacity style={styles.button} onPress={() => onAddPress()} testID={ADD_SCREEN_ADD_BUTTON}>
           <Text style={{ color: 'white', fontSize: 15 }}>Add</Text>
         </TouchableOpacity>
       </ScrollView>

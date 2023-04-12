@@ -10,9 +10,10 @@ import {
 
 import Card from '../components/Card';
 import { useRecepies } from '../providers/ItemsProvider';
+import { HOME_SCREEN } from '../utils/tests/testIDs';
 
 export default function Home({ navigation }) {
-  const { recepies, setRecepies, favorites} = useRecepies();
+  const { recepies} = useRecepies();
   
   const renderItem = ({ item }) => (
     <Card
@@ -28,7 +29,7 @@ export default function Home({ navigation }) {
   );
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView style={styles.container} testID={HOME_SCREEN}>
       <View>
         <FlatList
           data={recepies}
