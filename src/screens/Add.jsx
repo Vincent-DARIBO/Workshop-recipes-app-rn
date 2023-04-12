@@ -156,7 +156,7 @@ export default function AddScreen() {
             )}
           </>
           {!areFieldsFilled ? (
-            <Text style={{ color: 'red' }}>You must fill all the fields</Text>
+            <Text style={{ color: 'red', marginTop: 4 }}>You must fill all the fields</Text>
           ) : null}
         </View>
         <Toast
@@ -194,9 +194,9 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   inputsContainer: {
-    height: '70%',
+    // height: '70%',
+    gap: 10,
     width: '100%',
-    justifyContent: 'space-evenly',
     alignItems: 'center',
   },
   button: {
