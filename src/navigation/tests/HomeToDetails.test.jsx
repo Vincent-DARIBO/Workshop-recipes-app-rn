@@ -25,48 +25,38 @@ const Navigator = () => {
   );
 };
 
-it (it('Should navigate to the details screen when the user clicks on a card', () => {
-  const {rerender, queryByTestId} = render(<Details/>)
 
+it('Should navigate to the details screen when the user clicks on a card', () => {
+  const { queryByTestId, queryAllByTestId, queryByText } = render(
+    <Navigator />
+  );
 
-  rerender(<Details/>, {route :{params:{isFav: true}}})
-  expect(queryByText("Remove from favorite")).notToBeNull()
+  // Should display home screen
+  expect(queryByTestId(HOME_SCREEN)).not.toBeNull();
 
+  const cards = queryAllByTestId(CARD);
 
-})
-// it('Should navigate to the details screen when the user clicks on a card', () => {
-//   const { queryByTestId, queryAllByTestId, queryByText, rerender } = render(
-//     <Navigator />
-//   );
+  // Should display the cards
+  expect(cards.length).toBe(recepies.recepies.length);
+  recepies.recepies.forEach((item) =>
+    expect(queryByText(item.title)).not.toBeNull()
+  );
 
-//   // Should display home screen
-//   expect(queryByTestId(HOME_SCREEN)).not.toBeNull();
+  // Press on the first card
+  fireEvent.press(cards[0]);
 
-//   const cards = queryAllByTestId(CARD);
+  // Should display the details screen
+  expect(queryByTestId(HOME_SCREEN)).toBeNull();
+  const detailsScreen = queryByTestId(DETAILS_SCREEN);
+  expect(detailsScreen).not.toBeNull();
+  expect(queryByTestId(DETAILS_SCREEN_IMAGE)).not.toBeNull();
+  expect(queryByText(`#${recepies.recepies[0].category}`)).not.toBeNull();
+  expect(queryByText(recepies.recepies[0].title)).not.toBeNull();
+  expect(queryByText(recepies.recepies[0].description)).not.toBeNull();
 
-//   // Should display the cards
-//   expect(cards.length).toBe(recepies.recepies.length);
-//   recepies.recepies.forEach((item) =>
-//     expect(queryByText(item.title)).not.toBeNull()
-//   );
-
-//   // Press on the first card
-//   fireEvent.press(cards[0]);
-
-//   // Should display the details screen
-//   expect(queryByTestId(HOME_SCREEN)).toBeNull();
-//   const detailsScreen = queryByTestId(DETAILS_SCREEN);
-//   expect(detailsScreen).not.toBeNull();
-//   expect(queryByTestId(DETAILS_SCREEN_IMAGE)).not.toBeNull();
-//   expect(queryByText(`#${recepies.recepies[0].category}`)).not.toBeNull();
-//   expect(queryByText(recepies.recepies[0].title)).not.toBeNull();
-//   expect(queryByText(recepies.recepies[0].description)).not.toBeNull();
-
-//   // press on the add to favorite button
-//   const addToFavoriteButton = queryByTestId(BUTTON);
-//   expect(addToFavoriteButton).not.toBeNull();
-//   fireEvent.press(addToFavoriteButton);
-//   rerender(addToFavoriteButton)
-//   expect(addToFavoriteButton).toHaveStyle({ backgroundColor: 'red' });
-//   // rerender(detailsScreen);
-// });
+  // press on the add to favorite button
+  const addToFavoriteButton = queryByTestId(BUTTON);
+  expect(addToFavoriteButton).not.toBeNull();
+  fireEvent.press(addToFavoriteButton);
+  expect(addToFavoriteButton).toHaveStyle({ backgroundColor: 'red' });
+});
