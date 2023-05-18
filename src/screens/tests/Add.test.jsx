@@ -15,6 +15,7 @@ import {
 } from '../../utils/tests/testIDs';
 import { fireEvent, render, waitFor } from "../../utils/tests/testUtils";
 
+//To show: async tests, spyOn function and mocking, firing events
 describe('Add screen tests', () => {
 	const imageMock = {
 		"assets": [{

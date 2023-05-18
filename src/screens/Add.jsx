@@ -52,17 +52,21 @@ export default function AddScreen() {
     setTimeout(onDismissSnackBar, 2000);
   }, [visible]);
 
+
   async function onImportFromGalleryPress() {
-    let result = await ImagePicker.launchImageLibraryAsync({
+    const config = {
       mediaTypes: ImagePicker.MediaTypeOptions.Images,
       allowsEditing: true,
       aspect: [4, 3],
       quality: 1,
-    });
-
-    if (!result.canceled) {
-      setImage(result.assets[0].uri);
     }
+    try {
+      let result = await ImagePicker.launchImageLibraryAsync(config);
+
+      if (!result.canceled) {
+        setImage(result.assets[0].uri);
+      }
+    } catch (error) { console.log({ error }) }
   }
 
   function onAddPress() {

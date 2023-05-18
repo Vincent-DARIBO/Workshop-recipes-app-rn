@@ -3,7 +3,7 @@ import { render, fireEvent } from '../../utils/tests/testUtils';
 import Card from '../Card';
 import { CARD, CARD_ICON, CARD_IMAGE } from '../../utils/tests/testIDs';
 
-
+// To show : basic tests + test the styles of a component
 describe('Card component test', () => {
     it('Should render the card', async () => {
         const onCardPressMock = jest.fn();

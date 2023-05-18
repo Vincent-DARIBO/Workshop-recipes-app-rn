@@ -8,7 +8,7 @@ import { Provider } from "react-native-paper"
 import RecepiesProvider from "../../providers/RecepiesProvider"
 import { queryByTestId } from "@testing-library/react"
 
-
+// To show: wrap component in appropriate provider to have the right testing environments
 describe('FavoriteRecepies component tests', () => {
     it('Should not display the list if there is no favorite recepie', () => {
         const navigationMock = jest.fn()
