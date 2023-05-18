@@ -1,5 +1,5 @@
 import React from 'react';
-import { SafeAreaView, View, Image, StyleSheet, Text } from 'react-native';
+import { SafeAreaView, View, Image, StyleSheet, Text, Alert } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 import { useRecepies } from '../providers/ItemsProvider';
@@ -7,9 +7,9 @@ import Button from '../components/Button';
 import Badge from '../components/Badge'
 import { DETAILS_SCREEN, DETAILS_SCREEN_ICON, DETAILS_SCREEN_IMAGE } from '../utils/tests/testIDs';
 
-export default function Details({ route }) {
+export default function Details({ route, navigation }) {
   const { recepie } = route.params;
-  const { recepies, setRecepies} = useRecepies();
+  const { recepies, setRecepies, myRecepies, setMyRecepies } = useRecepies();
   const [isFav, setIsFav] = React.useState(recepie.isFav)
 
   const addToFav = () => {
@@ -29,11 +29,23 @@ export default function Details({ route }) {
     );
     setIsFav(false);
   };
+  console.log({ route })
+  const deleteRecepie = () => {
+    Alert.alert("Do you really want to delete this recepie ?", 'You will not be able to retrieve it back', [{ text: 'No' }, {
+      text: 'Yes', onPress: () => {
+        setRecepies(recepies.filter(item => item.title !== recepie.title))
+        setMyRecepies(myRecepies.filter(item => item.title !== recepie.title))
+        navigation.goBack()
+
+      }
+    }]);
+
+  }
   const title = !isFav ? 'Add to' : 'Remove from';
   return (
     <SafeAreaView style={styles.container} testID={DETAILS_SCREEN}>
       <View>
-        <Image source={recepie.imagePath} style={styles.image} testID={DETAILS_SCREEN_IMAGE}/>
+        <Image source={recepie.imagePath} style={styles.image} testID={DETAILS_SCREEN_IMAGE} />
         <View style={styles.padding}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{recepie.title}</Text>
@@ -41,22 +53,31 @@ export default function Details({ route }) {
           <View style={styles.descriptionContainer}>
             <Text style={styles.description}>{recepie.description}</Text>
           </View>
-        <Badge title={`#${recepie.category}`}/>
+          <View style={{ ...styles.row, justifyContent: 'space-between' }}>
+
+            <Badge title={`#${recepie.category}`} />
+            {myRecepies.find(item => item.title === recepie.title) && <Ionicons
+              name="trash"
+              size={30}
+              color="red"
+              onPress={() => deleteRecepie()}
+            />}
+          </View>
         </View>
       </View>
-        <View style={styles.button}>
-          <Button
-            title={title + ' favorite'}
-            onPress={() => (isFav ? removeFromFav() : addToFav())}
-            style={{backgroundColor : isFav ? "red" : "green"}}
-          >
-            <Ionicons
-              name={isFav ? 'trash' : 'heart'}
-              size={20}
-              color="white"
-            />
-          </Button>
-        </View>
+      <View style={styles.button}>
+        <Button
+          title={title + ' favorite'}
+          onPress={() => (isFav ? removeFromFav() : addToFav())}
+          style={{ backgroundColor: isFav ? "red" : "green" }}
+        >
+          <Ionicons
+            name={isFav ? 'trash' : 'heart'}
+            size={20}
+            color="white"
+          />
+        </Button>
+      </View>
     </SafeAreaView>
   );
 }
