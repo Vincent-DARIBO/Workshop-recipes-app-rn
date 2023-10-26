@@ -3,7 +3,7 @@ import * as React from 'react';
 import { StyleSheet, Platform } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import RecepiesProvider from './src/providers/RecepiesProvider';
-import { recepies as recepiesProvider } from './src/data/recepies';
+import { data as recepiesProvider } from './src/data/recepies';
 import Home from './src/screens/Home';
 import AddScreen from './src/screens/Add';
 import MainStack from './src/navigation/MainStack';

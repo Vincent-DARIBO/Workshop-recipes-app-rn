@@ -29,7 +29,7 @@ export default function Details({ route, navigation }) {
     );
     setIsFav(false);
   };
-  console.log({ route })
+
   const deleteRecepie = () => {
     Alert.alert("Do you really want to delete this recepie ?", 'You will not be able to retrieve it back', [{ text: 'No' }, {
       text: 'Yes', onPress: () => {

@@ -1,4 +1,4 @@
-export const recepies = {
+export const data = {
   recepies: [
     {
       id: 1,

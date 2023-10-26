@@ -1,10 +1,25 @@
-import React from 'react';
-import { Image, View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import React, { useReducer } from 'react';
+import {
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  ImageSourcePropType,
+} from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
-import { useRecepies } from '../providers/ItemsProvider';
 import { CARD, CARD_ICON, CARD_IMAGE } from '../utils/tests/testIDs';
 // TODO: trouver comment display les favoris
 
+export type Category = 'cake' | 'italian food' | 'mexican food' | 'cookie' | 'bakery';
+type Props = {
+  title: string;
+  category: Category;
+  image: ImageSourcePropType;
+  onCardPress: () => void;
+  canLike: boolean;
+  isFav: boolean;
+};
 export default function Card({
   title,
   category,
@@ -12,27 +27,9 @@ export default function Card({
   onCardPress,
   canLike = false,
   isFav = false,
-}) {
-  const { recepies, setRecepies } = useRecepies();
-  const [isSelected, setIsSelected] = React.useState(isFav);
+}: Props) {
+  const [toggled, toggleElement] = useReducer((val) => !val, false);
 
-  const onHeartPress = () => {
-    if (isSelected) {
-      setIsSelected(false);
-      setRecepies(
-        recepies.map((recepie) =>
-          recepie.title === title ? { ...recepie, isFav: false } : recepie
-        )
-      );
-    } else {
-      setIsSelected(true);
-      setRecepies(
-        recepies.map((recepie) =>
-          recepie.title === title ? { ...recepie, isFav: true } : recepie
-        )
-      );
-    }
-  };
 
   return (
     <TouchableOpacity
@@ -41,19 +38,19 @@ export default function Card({
       activeOpacity={0.5}
       testID={CARD}
     >
-      <Image source={image} style={styles.image} testID={CARD_IMAGE}/>
+      <Image source={image} style={styles.image} testID={CARD_IMAGE} />
 
       <Text style={styles.title} numberOfLines={2}>
         {title}
       </Text>
       <View style={styles.categoryContainer}>
         <Text style={styles.category}>{category}</Text>
-        {canLike && (
+        {true && (
           <Ionicons
             name="heart"
             size={26}
-            color={isSelected ? 'red' : '#d9d9d9'}
-            onPress={() => onHeartPress()}
+            color={toggled ? 'red' : '#d9d9d9'}
+            onPress={() => toggleElement()}
             testID={CARD_ICON}
           />
         )}
